@@ -67,12 +67,15 @@
     	$store = Store::find($store_id);
     	$new_name = $_POST['new_name'];
     	$store->update($new_name);
-    	var_dump($store);
     	$stores = Store::getAll();
-    	var_dump($stores);
-
   		return $app['twig']->render('stores.twig', array('stores' => $stores));
     });
+
+    $app->delete('/{store_id}/deleteSingleStore', function($store_id) use ($app) {
+		$store = Store::find($store_id);
+		$store->delete();
+		return $app['twig']->render('stores.twig', array('stores' => Store::getAll()));	
+	});
 
     $app->get("/brands", function() use ($app) {
     	$brands = Brand::getAll();

@@ -25,8 +25,19 @@
 
 			{% for store in stores %}
 
-					<li style="margin-top: 10px"><a href="/{{ store.getId }}/brands_of_store">{{ store.getName }}</a>
-					<a href="/{{ store.getId }}/edit_store"><button type="submit" class="btn btn-warning" style="margin-left: 15px">Edit</button></a></li>
+					<li style="margin-top: 10px">
+						
+						<a href="/{{ store.getId }}/brands_of_store">{{ store.getName }}</a>
+						
+						<a href="/{{ store.getId }}/edit_store"><button type="submit" class="btn btn-warning" style="margin-left: 15px">Edit</button></a>
+						
+						<form action="/{{ store.getId }}/deleteSingleStore" method="post" style="display: inline; margin-left: -20px">
+
+			            	<input type="hidden" name="_method" value="delete">
+							<button type="submit" class="btn btn-danger" style="margin-left: 30px">Delete</button>
+						</form>
+
+					</li>
 					
 			{% endfor %}
 				
@@ -34,7 +45,7 @@
 
 			<form action="/delete_all_stores" method="post">
             <input type="hidden" name="_method" value="delete">
-				<button type="submit" class="btn btn-danger" style="margin-top: 30px">Delete All</button>
+				<button type="submit" class="btn btn-danger" style="margin-top: 30px">! Delete All !</button>
 			</form>
 
 			{% else %}
