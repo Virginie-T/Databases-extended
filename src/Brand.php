@@ -55,26 +55,26 @@
             return $brands;
 		}
 
-		function getBrands()
+		function getStores()
         {
-            $statement = $GLOBALS['DB']->query("SELECT brands.* FROM stores
-                                                JOIN brands_stores ON (stores.id = brands_stores.store_id)
-                                                JOIN brands ON (brands.id = brands_stores.brand_id)
-                                                WHERE stores.id = {$this->getId()};");
+            $statement = $GLOBALS['DB']->query("SELECT stores.* FROM brands
+                                                JOIN brands_stores ON (brands.id = brands_stores.brand_id)
+                                                JOIN stores ON (stores.id = brands_stores.store_id)
+                                                WHERE brands.id = {$this->getId()};");
             $returned_brands = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $brands = [];
-            foreach ($returned_brands as $brand) {
-                $name = $brand['name'];
-                $id = $brand['id'];
-                $new_brand = new Brand($name, $id);
-                array_push($brands, $new_brand);
+            $stores = [];
+            foreach ($returned_stores as $store) {
+                $name = $store['name'];
+                $id = $store['id'];
+                $new_store = new Store($name, $id);
+                array_push($stores, $new_store);
             }
-            return $brands;
+            return $stores;
         }
 
-        function addBrand($new_brand)
+        function addStore($new_store)
         {
-            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$new_brand->getId()}, {$this->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$this->getId()}, {$new_store->getId()});");
         }
 
 
