@@ -26,3 +26,11 @@ CREATE TABLE brands_stores (id serial PRIMARY KEY, brand_id int, store_id int);
 CREATE DATABASE shoes_test WITH TEMPLATE shoes;
 \c shoes_test;
 
+
+
+
+
+
+copyright (c) 
+
+By Virginie Trubiano
