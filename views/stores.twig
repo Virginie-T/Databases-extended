@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stores</title>
+		        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	
+	<header style='color: white; text-align: center; background-color: steelblue; padding: 10px 0 10px 0'><em><h1>Local Shoes Stores</h1></em></header>
+
+	<div class="container">
+
+		<div>
+			<form action="/add_store" style='border: dashed 3px steelblue; padding: 10px; margin-top: 30px; width: 50%; text-align: center' method="post">
+				<label style="color: steelblue; font-size: 20px" for="name">Add a store :</label>
+	            <input name="name" type="text">
+
+	            <button type="submit" class='btn btn-success'>Add</button>
+			</form>
+		</div>
+		
+		{% if stores is not empty %}
+				
+				<ul style="font-size: 20px; margin-top: 40px">
+
+			{% for store in stores %}
+
+					<li style="margin-top: 10px"><a href="/{{ store.getId }}/brands_of_store">{{ store.getName }}</a>
+					<a href="/{{ store.getId }}/edit_store"><button type="submit" class="btn btn-warning" style="margin-left: 15px">Edit</button></a></li>
+					
+			{% endfor %}
+				
+				</ul>
+
+			<form action="/delete_all_stores" method="post">
+            <input type="hidden" name="_method" value="delete">
+				<button type="submit" class="btn btn-danger" style="margin-top: 30px">Delete All</button>
+			</form>
+
+			{% else %}
+				
+				<em><p style="margin-top: 20px">Sorry, we have nothing listed yet</p></em>
+
+		{% endif %}
+
+		<a href="/"><h3 style="text-align: center">Home</h3></a>
+
+	</div>
+
+</body>
+</html>

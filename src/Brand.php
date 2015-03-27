@@ -62,7 +62,7 @@
                                                 JOIN brands_stores ON (brands.id = brands_stores.brand_id)
                                                 JOIN stores ON (stores.id = brands_stores.store_id)
                                                 WHERE brands.id = {$this->getId()};");
-            $returned_brands = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $returned_stores = $statement->fetchAll(PDO::FETCH_ASSOC);
             $stores = [];
             foreach ($returned_stores as $store) {
                 $name = $store['name'];
@@ -78,6 +78,15 @@
             $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$this->getId()}, {$new_store->getId()});");
         }
 
+ 		static function find($search_id)
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM brands WHERE id = {$search_id};");
+            $returned_brand = $statement->fetch(PDO::FETCH_ASSOC);
+            $name = $returned_brand['name'];
+            $id = $returned_brand['id'];
+            $found_brand = new Brand($name, $id);
+            return $found_brand;
+        }
 
 
 

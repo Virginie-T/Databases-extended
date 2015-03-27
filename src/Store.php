@@ -78,6 +78,26 @@
             $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$new_brand->getId()}, {$this->getId()});");
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stores SET name '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+		static function find($search_id)
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM stores WHERE id = {$search_id};");
+            $returned_stores = $statement->fetch(PDO::FETCH_ASSOC);
+            $name = $returned_stores['name'];
+            $id = $returned_stores['id'];
+            $found_store = new Store($name, $id);
+            return $found_store;
+        }
 	}
 
 ?>

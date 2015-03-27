@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stores</title>
+		        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	
+	<header style='color: white; text-align: center; background-color: steelblue; padding: 10px 0 10px 0'><em><h1>Local Brand Shoes</h1></em></header>
+
+	<div class="container">
+
+		<div>
+			<form action="/add_brand" style='border: dashed 3px steelblue; padding: 10px; margin-top: 30px; width: 50%; text-align: center' method="post">
+				<label style="color: steelblue; font-size: 20px" for="name">Add a brand :</label>
+	            <input name="name" type="text">
+
+	            <button type="submit" class='btn btn-success'>Add</button>
+			</form>
+		</div>
+
+		{% if brands is not empty %}
+				
+				<ul style="font-size: 20px; margin-top: 40px">
+
+			{% for brand in brands %}
+
+					<li style="margin-top: 10px"><a href="/{{ brand.getId }}/stores_for_brand">{{ brand.getName }}</a></li>
+
+			{% endfor %}
+				
+				</ul>
+
+		{% endif %}
+
+		<a href="/"><h3 style="text-align: center">Home</h3></a>
+
+	</div>
+
+</body>
+</html>

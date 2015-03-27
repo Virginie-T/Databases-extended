@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit store</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header style='color: white; text-align: center; background-color: steelblue; padding: 10px 0 10px 0'><em><h1>Edit the name of {{ store.getName }}</h1></em></header>
+
+	<div class="container" style="color: steelblue; font-size: 20px; margin-top: 30px">
+		
+		<form action="/{{ store.getId }}/edit_store_done" method="post">
+			<input type="hidden" name="_method" value="patch">
+			<label for="new_name">Enter a new name for that store :</label>
+			<input name="new_name" type="text">
+			<button type="submit" class="btn btn-success">Submit</button>
+		</form>
+
+	</div>
+</body>
+</html>
