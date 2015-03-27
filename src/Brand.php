@@ -1,6 +1,7 @@
 <?php 
 
 	class Brand {
+
 		private $name;
 		private $id;
 
@@ -30,16 +31,16 @@
 			$this->id = (int) $new_id;
 		}
 
-		static function save()
+		function save()
 		{
 			$statement = $GLOBALS['DB']->query("INSERT INTO brands (name) VALUES ('{$this->getName()}') RETURNING id;");
 			$result = $statement->fetch(PDO::FETCH_ASSOC);
-			$this->setId($result(['id']));
+            $this->setId($result['id']);
 		}
 
 		static function deleteAll()
 		{
-			$GLOBALS['DB']->exec("DELETE * FROM brands;");
+			$GLOBALS['DB']->exec("DELETE FROM brands*;");
 		}
 
 		static function getAll()
